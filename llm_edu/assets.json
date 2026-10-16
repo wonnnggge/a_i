@@ -1,0 +1,74 @@
+[
+  {
+    "host": "web-01",
+    "team": "결제팀",
+    "owner": "kim@example.com",
+    "product": "Apache Log4j",
+    "version": "2.14.1",
+    "note": "결제 API 로깅"
+  },
+  {
+    "host": "api-02",
+    "team": "결제팀",
+    "owner": "kim@example.com",
+    "product": "Spring Framework",
+    "version": "5.3.20",
+    "note": "결제 API 본체"
+  },
+  {
+    "host": "legacy-03",
+    "team": "인프라팀",
+    "owner": "park@example.com",
+    "product": "Apache Struts",
+    "version": "2.3.30",
+    "note": "사내 전자결재 (교체 예정)"
+  },
+  {
+    "host": "file-04",
+    "team": "총무팀",
+    "owner": "lee@example.com",
+    "product": "ownCloud",
+    "version": "10.13.1",
+    "note": "사내 파일 공유"
+  },
+  {
+    "host": "ml-05",
+    "team": "AI팀",
+    "owner": "choi@example.com",
+    "product": "LiteLLM",
+    "version": "1.80.2",
+    "note": "사내 LLM 게이트웨이"
+  },
+  {
+    "host": "mail-06",
+    "team": "인프라팀",
+    "owner": "park@example.com",
+    "product": "Zimbra Collaboration",
+    "version": "10.1.20",
+    "note": "사내 메일"
+  },
+  {
+    "host": "shop-07",
+    "team": "커머스팀",
+    "owner": "jung@example.com",
+    "product": "Adobe Commerce",
+    "version": "2.4.7",
+    "note": "온라인 쇼핑몰"
+  },
+  {
+    "host": "bastion-08",
+    "team": "인프라팀",
+    "owner": "park@example.com",
+    "product": "GNU Bash",
+    "version": "4.3",
+    "note": "점프 서버"
+  },
+  {
+    "host": "dev-09",
+    "team": "개발팀",
+    "owner": "yoon@example.com",
+    "product": "PostgreSQL",
+    "version": "14.2",
+    "note": "개발 DB — 관련 공지 없음"
+  }
+]

@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>보안 공지</title></head>
+<body>
+  <h1>벤더 보안 공지</h1>
+  <div id="advisory">불러오는 중...</div>
+  <script>
+    // 본문을 자바스크립트가 그린다 - HTML 소스에는 완성된 글이 없다
+    setTimeout(() => {
+      document.getElementById("advisory").innerHTML = `
+        <p>영향 제품: Apache Log4j 2.0-beta9 ~ 2.14.1</p>
+        <p>CVE: CVE-2021-44228</p>
+        <p>CVSS: 10.0 CRITICAL</p>
+        <p>조치: 2.17.1 이상으로 업그레이드</p>`;
+    }, 300);
+  </script>
+</body></html>

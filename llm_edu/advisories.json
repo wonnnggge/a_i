@@ -1,0 +1,92 @@
+[
+  {
+    "no": 1,
+    "cve_id": "CVE-2021-44228",
+    "label": "Apache Log4j2",
+    "source": "osv",
+    "url": "https://osv.dev/vulnerability/GHSA-jfh8-c2jp-5v3q",
+    "truncated": true,
+    "advisory": "# Summary Log4j versions prior to 2.16.0 are subject to a remote code execution vulnerability via the ldap JNDI parser. As per [Apache's Log4j security guide](https://logging.apache.org/log4j/2.x/security.html): Apache Log4j2 <=2.14.1 JNDI features used in configuration, log messages, and parameters do not protect against attacker controlled LDAP and other JNDI related endpoints. An attacker who can control log messages or log message parameters can execute arbitrary code loaded from LDAP servers when message lookup substitution is enabled. From log4j 2.16.0, this behavior has been disabled by default. Log4j version 2.15.0 contained an earlier fix for the vulnerability, but that patch did not disable attacker-controlled JNDI lookups in all situations. For more information, see the `Updated advice for version 2.16.0` section of this advisory. # Impact Logging untrusted or user controlled data with a vulnerable version of Log4J may result in Remote Code Execution (RCE) against your application. This includes untrusted data included in logged errors such as exception traces, authentication failures, and other unexpected vectors of user controlled input. # Affected versions Any Log4J version prior to v2.15.0 is affected to this specific issue. The v1 branch of Log4J which is considered End Of Life (EOL) is vulnerable to other RCE vectors so the recommendation is to still update to 2.16.0 where possible. ## Security releases Additional backports of this fix have been made available in versions 2.3.1, 2.12.2, and 2.12.3 ## Affected packages Only the `org.apache.logging.log4j:log4j-core` package is directly affected by this vulnerability. The `org.apache.logging.log4j:log4j-api` should be kept at the same version as the `org.apache.logging.log4j:log4j-core` package to ensure compatability if in use. # Remediation Advice ## Updated advice for version 2.16.0 The Apache Logging Services team provided updated mitigation advice upon the release of version 2.16.0, which [disables JNDI by default and completely removes support for message lookups](https://logging.apache.org/log4j/2.x/changes-report.html#a2.16.0). Even in version 2.15.0, lookups used in layouts to provide specific pieces of context information will still recursively resolve, possibly triggering JNDI lookups. This problem is being tracked as [CVE-2021-45046](https://nvd.nist.gov/vuln/detail/CVE-2021-45046). More information is available on the [GitHub Security Advisory for CVE-2021-45046](https://github.c"
+  },
+  {
+    "no": 2,
+    "cve_id": "CVE-2022-22965",
+    "label": "Spring Framework",
+    "source": "osv",
+    "url": "https://osv.dev/vulnerability/GHSA-36p3-wjmg-h94x",
+    "truncated": false,
+    "advisory": "Spring Framework prior to versions 5.2.20 and 5.3.18 contains a remote code execution vulnerability known as `Spring4Shell`. ## Impact A Spring MVC or Spring WebFlux application running on JDK 9+ may be vulnerable to remote code execution (RCE) via data binding. The specific exploit requires the application to run on Tomcat as a WAR deployment. If the application is deployed as a Spring Boot executable jar, i.e. the default, it is not vulnerable to the exploit. However, the nature of the vulnerability is more general, and there may be other ways to exploit it. These are the prerequisites for the exploit: - JDK 9 or higher - Apache Tomcat as the Servlet container - Packaged as WAR - `spring-webmvc` or `spring-webflux` dependency ## Patches - Spring Framework [5.3.18](https://github.com/spring-projects/spring-framework/releases/tag/v5.3.18) and [5.2.20](https://github.com/spring-projects/spring-framework/releases/tag/v5.2.20.RELEASE) - Spring Boot [2.6.6](https://github.com/spring-projects/spring-boot/releases/tag/v2.6.6) and [2.5.12](https://github.com/spring-projects/spring-boot/releases/tag/v2.5.12) ## Workarounds For those who are unable to upgrade, leaked reports recommend setting `disallowedFields` on `WebDataBinder` through an `@ControllerAdvice`. This works generally, but as a centrally applied workaround fix, may leave some loopholes, in particular if a controller sets `disallowedFields` locally through its own `@InitBinder` method, which overrides the global setting. To apply the workaround in a more fail-safe way, applications could extend `RequestMappingHandlerAdapter` to update the `WebDataBinder` at the end after all other initialization. In order to do that, a Spring Boot application can declare a `WebMvcRegistrations` bean (Spring MVC) or a `WebFluxRegistrations` bean (Spring WebFlux)."
+  },
+  {
+    "no": 3,
+    "cve_id": "CVE-2017-5638",
+    "label": "Apache Struts 2",
+    "source": "redhat",
+    "url": "https://access.redhat.com/security/cve/CVE-2017-5638",
+    "truncated": false,
+    "advisory": "The Jakarta Multipart parser in Apache Struts 2 2.3.x before 2.3.32 and 2.5.x before 2.5.10.1 has incorrect exception handling and error-message generation during file-upload attempts, which allows remote attackers to execute arbitrary commands via a crafted Content-Type, Content-Disposition, or Content-Length HTTP header, as exploited in the wild in March 2017 with a Content-Type header containing a #cmd= string. A flaw was reported in Apache Struts 2 that could allow an attacker to perform remote code execution with a malicious Content-Type value. A previous statement by Red Hat related to this CVE, prior to August 2019, said that Apache Struts 2 is not included in any Red Hat products. This earlier statement was incorrect. While Struts 2 is not actively compiled, shipped, used, or enabled in any Red Hat provided final products, and does not cause any vulnerability in the product, struts2-core jars have been included in some products' source code packages. The inclusion was part of an import of the Google Guice repository, which includes struts2-core. Customers that build artefacts from our source code could be at risk. Red Hat will remove these artefacts from source code in future releases. The products that included the Struts 2 artefacts in their source jars: Fuse Service Works 6.0.0 Single Sign On 7.3.0+ If you have used the source package from one of these products to build artefacts on your system, you should do the following to remove potentially affected jars: 1. Run 'find . -name struts2*.jar' under the source location 2. Remove any files found This will not affect the product, as the jar is included with the source of google-guice, but no functionality requiring struts2 is implemented."
+  },
+  {
+    "no": 4,
+    "cve_id": "CVE-2014-6271",
+    "label": "GNU Bash",
+    "source": "redhat",
+    "url": "https://access.redhat.com/security/cve/CVE-2014-6271",
+    "truncated": false,
+    "advisory": "GNU Bash through 4.3 processes trailing strings after function definitions in the values of environment variables, which allows remote attackers to execute arbitrary code via a crafted environment, as demonstrated by vectors involving the ForceCommand feature in OpenSSH sshd, the mod_cgi and mod_cgid modules in the Apache HTTP Server, scripts executed by unspecified DHCP clients, and other situations in which setting the environment occurs across a privilege boundary from Bash execution, aka \"ShellShock.\" NOTE: the original fix for this issue was incorrect; CVE-2014-7169 has been assigned to cover the vulnerability that is still present after the incorrect fix. A flaw was found in the way Bash evaluated certain specially crafted environment variables. An attacker could use this flaw to override or bypass environment restrictions to execute shell commands. Certain services and applications allow remote unauthenticated attackers to provide environment variables, allowing them to exploit this issue."
+  },
+  {
+    "no": 5,
+    "cve_id": "CVE-2023-49105",
+    "label": "ownCloud",
+    "source": "osv",
+    "url": "https://osv.dev/vulnerability/CVE-2023-49105",
+    "truncated": false,
+    "advisory": "An issue was discovered in ownCloud owncloud/core before 10.13.1. An attacker can access, modify, or delete any file without authentication if the username of a victim is known, and the victim has no signing-key configured. This occurs because pre-signed URLs can be accepted even when no signing-key is configured for the owner of the files. The earliest affected version is 10.6.0."
+  },
+  {
+    "no": 6,
+    "cve_id": "CVE-2026-48710",
+    "label": "Starlette",
+    "source": "redhat",
+    "url": "https://access.redhat.com/security/cve/CVE-2026-48710",
+    "truncated": true,
+    "advisory": "Starlette is a lightweight ASGI framework/toolkit. Prior to version 1.0.1, the HTTP `Host` request header was not validated before being used to reconstruct `request.url`. Because the routing algorithm relies on the raw HTTP path while `request.url` is rebuilt from the `Host` header, a malformed header could make `request.url.path` differ from the path that was actually requested. Middleware and endpoints that apply security restrictions based on `request.url` (rather than the raw `scope` path) could therefore be bypassed. Users should upgrade to a version greater than or equal to version 1.0.1, which validates the `Host` header against the grammar of RFC 9112 §3.2 / RFC 3986 §3.2.2 when constructing `request.url` and falls back to `scope[\"server\"]` for malformed values. A flaw was found in Starlette, a lightweight ASGI (Asynchronous Server Gateway Interface) framework. A remote attacker could exploit this vulnerability by sending a specially crafted HTTP `Host` request header. This malformed header could cause the `request.url` to be incorrectly reconstructed, leading to a discrepancy with the actual requested path. Consequently, security restrictions enforced by middleware and endpoints that rely on `request.url` for validation could be bypassed, potentially allowing unauthorized access or actions. The impact of this vulnerability is rated Moderate. A malformed Host header can manipulate the reconstructed request.url.path, introducing a discrepancy with the canonical ASGI request path (scope[\"path\"]). However, the vulnerability does not directly grant access, modify routing, or bypass security controls on its own. A path-based authentication or authorization bypass is possible only if an application depends on request.url.path for access control decisions rather than the canonical ASGI path or standard framework mechanisms. The impact relies heavily on downstream application design rather than a default library failure. Red Hat Satellite / Insights (IoP): The starlette package is included as a dependency of Connexion, but this flaw is rated Low impact because these services do not use path-based authentication middleware and all services are deployed behind reverse proxies. OpenShift Lightspeed (OLS): The starlette package is included as a dependency, but this flaw is rated Low impact because authentication is enforced via Kubernetes TokenReview/SubjectAccessReview through FastAPI dependency injection, not path-based middleware; request.url.path is only "
+  },
+  {
+    "no": 7,
+    "cve_id": "CVE-2026-59822",
+    "label": "LiteLLM",
+    "source": "redhat",
+    "url": "https://access.redhat.com/security/cve/CVE-2026-59822",
+    "truncated": false,
+    "advisory": "LiteLLM is a proxy server (AI Gateway) to call LLM APIs in OpenAI (or native) format. Prior to 1.84.0, LiteLLM's MCP Streamable HTTP endpoint allowed an unauthenticated attacker to use a fabricated Authorization header to trigger an OAuth2 passthrough fallback path that replaced failed LiteLLM key validation with an empty UserAPIKeyAuth() object, allowing requests to reach MCP tooling without a valid LiteLLM key. This issue is fixed in version 1.84.0. A flaw was found in LiteLLM, a proxy server designed for Large Language Model (LLM) APIs. An unauthenticated attacker could exploit a vulnerability in the MCP Streamable HTTP endpoint. By using a fabricated Authorization header, the attacker could bypass the standard key validation, gaining unauthorized access to the MCP tooling. This allows requests to be processed without a valid LiteLLM key, potentially leading to unauthorized operations. affects LiteLLM proxy deployments prior to 1.84.0 where the MCP Streamable HTTP endpoint is exposed. Red Hat products that include LiteLLM as a Python dependency— including Red Hat OpenShift AI (odh-mlflow-rhel9 and similar images), Red Hat Ansible Automation Platform Lightspeed chatbot images (lightspeed-chatbot-rhel9, ansible-chatbot-stack), and Red Hat Exploit Intelligence (vulnerability-analysis-rhel9)—are not affected in their default configurations because they do not start the LiteLLM proxy server or expose its MCP HTTP authentication path. These images run services such as MLflow, Lightspeed Core (lightspeed_stack.py), or vulnerability analysis workloads and use LiteLLM only as a client library or transitive dependency. The vulnerable execute path is reachable only when LiteLLM proxy is explicitly deployed with MCP routes enabled."
+  },
+  {
+    "no": 8,
+    "cve_id": "CVE-2026-75650",
+    "label": "Adobe Commerce",
+    "source": "osv",
+    "url": "https://osv.dev/vulnerability/CVE-2026-75650",
+    "truncated": false,
+    "advisory": "Adobe Commerce is affected by an Improper Neutralization of Special Elements Used in a Template Engine vulnerability that could result in arbitrary code execution in the context of the current user. An attacker could exploit this vulnerability to execute arbitrary code. Exploitation of this issue does not require user interaction. Scope is changed."
+  },
+  {
+    "no": 9,
+    "cve_id": "CVE-2026-49869",
+    "label": "Kestra",
+    "source": "osv",
+    "url": "https://osv.dev/vulnerability/CVE-2026-49869",
+    "truncated": false,
+    "advisory": "Kestra is an open-source, event-driven orchestration platform. Prior to 1.0.45 and 1.3.21, AuthenticationFilter in Kestra OSS uses request.getPath().endsWith(\"/configs\") to whitelist the public configuration endpoint from Basic Auth. Because the check is a suffix match rather than an exact path match, any API path whose last segment is configs bypasses authentication entirely. An unauthenticated remote attacker can exploit this to create and execute arbitrary workflows without credentials. Because Kestra ships with script execution plugins (plugin-script-shell, plugin-script-python, etc.) enabled by default, this directly results in unauthenticated Remote Code Execution as root inside the Kestra worker container. This vulnerability is fixed in 1.0.45 and 1.3.21."
+  },
+  {
+    "no": 10,
+    "cve_id": "CVE-2026-73570",
+    "label": "Zimbra Collaboration",
+    "source": "osv",
+    "url": "https://osv.dev/vulnerability/CVE-2026-73570",
+    "truncated": false,
+    "advisory": "A remote code execution vulnerability exists in Zimbra Collaboration (ZCS) before 10.1.20 when the optional zimbra-snmp package is installed and SNMP notifications are enabled. Due to improper sanitization of untrusted input during SNMP notification processing, an unauthenticated attacker can send specially crafted SMTP requests that may result in execution of arbitrary operating system commands as the Zimbra user."
+  }
+]
